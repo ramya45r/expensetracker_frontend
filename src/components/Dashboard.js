@@ -57,7 +57,23 @@ const Dashboard = () => {
       console.error('Error deleting expense:', err);
     }
   };
+  const [budgets, setBudgets] = useState([]);
 
+  useEffect(() => {
+    const fetchBudgets = async () => {
+      const token = localStorage.getItem('token');
+      try {
+        const response = await axios.get('http://localhost:5000/api/budgets', {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        setBudgets(response.data);
+      } catch (err) {
+        console.error('Error fetching budgets:', err);
+      }
+    };
+
+    fetchBudgets();
+  }, []);
   return (
     <div className="dashboard-container">
       <h2>Expense Dashboard</h2>
@@ -71,7 +87,7 @@ const Dashboard = () => {
           {/* Add more currencies as needed */}
         </select>
       </div>
-      <BudgetChart expenses={expenses} budget={budget} />
+      <BudgetChart expenses={expenses} budget={budgets} />
       <h3>Expense Filters</h3>
       <div className="category-select">
         <label htmlFor="category">Category: </label>
@@ -116,9 +132,7 @@ const Dashboard = () => {
             <button className="delete-button" onClick={() => handleDelete(expense._id)}>
               Delete
             </button>
-            <button className="delete-button" onClick={() => handleDelete(expense._id)}>
-              Edit
-            </button>
+          
           </li>
         ))}
       </ul>

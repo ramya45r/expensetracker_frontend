@@ -35,7 +35,8 @@ const BudgetForm = ({ onAddBudget }) => {
   };
 
   return (
-    <><form onSubmit={handleSubmit}>
+    <div className="container">
+<form onSubmit={handleSubmit}>
           <div>
               <label htmlFor="category">Category</label>
               <select
@@ -63,7 +64,7 @@ const BudgetForm = ({ onAddBudget }) => {
           </div>
 
           <button type="submit">Add Budget</button>
-      </form><BudgetDashboard /></>
+      </form><BudgetDashboard /></div>
   );
 };
 

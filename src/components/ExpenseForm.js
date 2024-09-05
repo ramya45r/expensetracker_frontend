@@ -46,12 +46,8 @@ const handleIncome=async ()=>{
       }
 }
   return (
-    <>
-    <input
-              type="number"
-              value={income}
-              onChange={(e) => setIncome(e.target.value)}
-              placeholder="Income" /><button onClick={handleIncome}>Income</button><form onSubmit={handleSubmit}>
+    <div className="container">
+  <form onSubmit={handleSubmit}>
           <input
               type="number"
               value={amount}
@@ -74,7 +70,13 @@ const handleIncome=async ()=>{
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Description" />
           <button type="submit">Add Expense</button>
-      </form></>
+      </form>
+      <h2>Add income</h2>
+      <input
+              type="number"
+              value={income}
+              onChange={(e) => setIncome(e.target.value)}
+              placeholder="Income" /><button onClick={handleIncome}>Income</button></div>
   );
 };
 
