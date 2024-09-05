@@ -88,8 +88,18 @@ const navigate=useNavigate();
     Category: expense.category,
     Description: expense.description,
   }));
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    navigate('/login');
+  };
   return (
     <div className="dashboard-container">
+         <header className="dashboard-header">
+        <h1>Expense Manager</h1>
+        <nav>
+          <button onClick={handleLogout}>Logout</button>
+        </nav>
+      </header>
       <h2>Expense Dashboard</h2>
       <div className="currency-select">
         <button onClick={handlenavigate}>Create Expense</button>
