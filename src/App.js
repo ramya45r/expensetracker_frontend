@@ -15,7 +15,7 @@ function App() {
 
 
           <Route
-            path="/register"
+            path="/"
             element={<Register />}
           />
           <Route

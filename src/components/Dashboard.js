@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import BudgetChart from './BudgetChart';
-import './Dashboard.css'; // Import the CSS file
+import './Dashboard.css'; 
+import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
   const [expenses, setExpenses] = useState([]);
@@ -13,7 +14,7 @@ const Dashboard = () => {
   const [maxAmount, setMaxAmount] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
-
+const navigate=useNavigate();
   useEffect(() => {
     const fetchData = async () => {
       const token = localStorage.getItem('token');
@@ -74,18 +75,19 @@ const Dashboard = () => {
 
     fetchBudgets();
   }, []);
+  const handlenavigate=()=>{
+    navigate('/expenseform')
+  }
+  const handlebudget=()=>{
+    navigate('/budgetform')
+  }
   return (
     <div className="dashboard-container">
       <h2>Expense Dashboard</h2>
       <div className="currency-select">
-        <label htmlFor="currency">Select Currency: </label>
-        <select id="currency" value={selectedCurrency} onChange={handleCurrencyChange}>
-          <option value="USD">USD</option>
-          <option value="EUR">EUR</option>
-          <option value="GBP">GBP</option>
-          <option value="JPY">JPY</option>
-          {/* Add more currencies as needed */}
-        </select>
+        <button onClick={handlenavigate}>Create Expense</button>
+        <button onClick={handlebudget}>Create Budget</button>
+
       </div>
       <BudgetChart expenses={expenses} budget={budgets} />
       <h3>Expense Filters</h3>
@@ -93,7 +95,6 @@ const Dashboard = () => {
         <label htmlFor="category">Category: </label>
         <select id="category" value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
           <option value="">All</option>
-          {/* Replace with actual categories if available */}
           <option value="Groceries">Groceries</option>
           <option value="Utilities">Utilities</option>
           <option value="Entertainment">Entertainment</option>

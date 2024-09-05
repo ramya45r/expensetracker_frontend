@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './Register.css'; // Importing the CSS file
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const Register = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
+const navigate=useNavigate()
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await axios.post('http://localhost:5000/api/users/register', { name, email, password });
       alert('Registration Successful');
+      navigate('/login')
     } catch (err) {
       console.error(err);
     }

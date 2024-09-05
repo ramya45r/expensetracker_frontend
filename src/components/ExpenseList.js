@@ -1,7 +1,5 @@
 import React from 'react';
-import './ExpenseList.css'; // Ensure you have imported the CSS file for styling
-
-// Function to group expenses by month and year
+import './ExpenseList.css'; 
 const groupByMonth = (expenses) => {
   return expenses.reduce((groups, expense) => {
     const date = new Date(expense.date);
@@ -16,7 +14,6 @@ const groupByMonth = (expenses) => {
   }, {});
 };
 
-// Helper function to format the month and year
 const formatMonthYear = (monthYear) => {
   const [year, month] = monthYear.split('-');
   return new Date(year, month - 1).toLocaleString('default', { month: 'long', year: 'numeric' });
@@ -34,7 +31,7 @@ const ExpenseList = ({ expenses }) => {
           <ul>
             {groupedExpenses[monthYear].map((expense) => (
               <li key={expense._id}>
-                ${expense.amount} on {new Date(expense.date).toLocaleDateString()}
+                {expense.category}: ${expense.amount} on {new Date(expense.date).toLocaleDateString()}
               </li>
             ))}
           </ul>
