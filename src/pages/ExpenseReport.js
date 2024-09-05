@@ -4,6 +4,7 @@ import { CSVLink } from 'react-csv';
 
 const ExpenseReport = () => {
   const [expenses, setExpenses] = useState([]);
+console.log(expenses,'total');
 
   useEffect(() => {
     const fetchData = async () => {

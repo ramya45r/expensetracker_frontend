@@ -4,6 +4,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Dashboard from "./components/Dashboard";
 import ExpenseForm from "./components/ExpenseForm";
+import BudgetForm from "./components/BudgetForm";
 
 function App() {
 
@@ -11,25 +12,29 @@ function App() {
     <React.Fragment>
       <Router>
         <Routes>
-      
-              
-                 <Route
-                path="/register"
-                element={<Register/>}
-              />
-              <Route
-                path="/login"
-                element={<Login/>}
-              />
-               <Route
-                path="/dashboard"
-                element={<Dashboard/>}
-              />
-               <Route
-                path="/expenseform"
-                element={<ExpenseForm/>}
-              />
-             
+
+
+          <Route
+            path="/register"
+            element={<Register />}
+          />
+          <Route
+            path="/login"
+            element={<Login />}
+          />
+          <Route
+            path="/dashboard"
+            element={<Dashboard />}
+          />
+          <Route
+            path="/expenseform"
+            element={<ExpenseForm />}
+          />
+           <Route
+            path="/budgetform"
+            element={<BudgetForm />}
+          />
+
         </Routes>
       </Router>
     </React.Fragment>
