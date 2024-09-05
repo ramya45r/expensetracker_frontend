@@ -3,6 +3,7 @@ import axios from 'axios';
 import BudgetChart from './BudgetChart';
 import './Dashboard.css'; 
 import { useNavigate } from 'react-router-dom';
+import { CSVLink } from 'react-csv';
 
 const Dashboard = () => {
   const [expenses, setExpenses] = useState([]);
@@ -81,6 +82,12 @@ const navigate=useNavigate();
   const handlebudget=()=>{
     navigate('/budgetform')
   }
+  const csvData = expenses.map(expense => ({
+    Date: new Date(expense.date).toLocaleDateString(),
+    Amount: expense.amount,
+    Category: expense.category,
+    Description: expense.description,
+  }));
   return (
     <div className="dashboard-container">
       <h2>Expense Dashboard</h2>
@@ -137,6 +144,9 @@ const navigate=useNavigate();
           </li>
         ))}
       </ul>
+      <CSVLink data={csvData} filename={"expense-report.csv"}>
+        <button>Download CSV</button>
+      </CSVLink>
     </div>
   );
 };
