@@ -1,42 +1,83 @@
-/* Dashboard.css */
+
 .dashboard-container {
-    max-width: 800px;
-    margin: 2rem auto;
-    padding: 1rem;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
   }
   
   h2 {
     text-align: center;
-    color: #333;
-    margin-bottom: 1rem;
+    margin-bottom: 20px;
   }
   
-  h3 {
-    margin-top: 1rem;
-    color: #555;
+  .currency-select,
+  .category-select,
+  .date-filters {
+    margin-bottom: 20px;
   }
   
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 1rem;
+  select {
+    padding: 5px;
+    margin-left: 10px;
   }
   
-  table th, table td {
-    padding: 0.8rem;
-    border: 1px solid #ddd;
-    text-align: left;
+  label {
+    font-weight: bold;
   }
   
-  table th {
-    background-color: #f4f4f4;
-    color: #333;
+  .date-filters {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
   }
   
-  table td {
-    color: #555;
+  input[type="date"] {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .expense-history {
+    margin-top: 20px;
+  }
+  
+  .expense-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .expense-item:last-child {
+    border-bottom: none;
+  }
+  
+  .delete-button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .delete-button:hover {
+    background-color: #e60000;
+  }
+  
+  @media (max-width: 768px) {
+    .date-filters {
+      flex-direction: column;
+    }
+  
+    .date-filters label {
+      margin-bottom: 5px;
+    }
+  
+    .date-filters input {
+      margin-bottom: 10px;
+    }
   }
   

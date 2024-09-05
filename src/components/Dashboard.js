@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import BudgetChart from './BudgetChart';
-import ExpenseList from './ExpenseList';
+import './Dashboard.css'; // Import the CSS file
 
 const Dashboard = () => {
   const [expenses, setExpenses] = useState([]);
@@ -39,19 +39,29 @@ const Dashboard = () => {
     return (amount * exchangeRate).toFixed(2);
   };
 
-  // Filter expenses based on selected filters
   const filteredExpenses = expenses.filter((expense) => {
     const categoryMatch = !selectedCategory || expense.category === selectedCategory;
-   
     const dateMatch = (!startDate || new Date(expense.date) >= new Date(startDate)) &&
                       (!endDate || new Date(expense.date) <= new Date(endDate));
     return categoryMatch && dateMatch;
   });
 
+  const handleDelete = async (expenseId) => {
+    const token = localStorage.getItem('token');
+    try {
+      await axios.delete(`http://localhost:5000/api/expenses/${expenseId}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      setExpenses(expenses.filter(expense => expense._id !== expenseId));
+    } catch (err) {
+      console.error('Error deleting expense:', err);
+    }
+  };
+
   return (
-    <div>
+    <div className="dashboard-container">
       <h2>Expense Dashboard</h2>
-      <div>
+      <div className="currency-select">
         <label htmlFor="currency">Select Currency: </label>
         <select id="currency" value={selectedCurrency} onChange={handleCurrencyChange}>
           <option value="USD">USD</option>
@@ -63,7 +73,7 @@ const Dashboard = () => {
       </div>
       <BudgetChart expenses={expenses} budget={budget} />
       <h3>Expense Filters</h3>
-      <div>
+      <div className="category-select">
         <label htmlFor="category">Category: </label>
         <select id="category" value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
           <option value="">All</option>
@@ -78,28 +88,37 @@ const Dashboard = () => {
           <option value="Other">Other</option>
         </select>
       </div>
-    
-      <div>
-        <label htmlFor="startDate">Start Date: </label>
-        <input
-          type="date"
-          id="startDate"
-          value={startDate}
-          onChange={(e) => setStartDate(e.target.value)}
-        />
-        <label htmlFor="endDate">End Date: </label>
-        <input
-          type="date"
-          id="endDate"
-          value={endDate}
-          onChange={(e) => setEndDate(e.target.value)}
-        />
+      <div className="date-filters">
+        <div>
+          <label htmlFor="startDate">Start Date: </label>
+          <input
+            type="date"
+            id="startDate"
+            value={startDate}
+            onChange={(e) => setStartDate(e.target.value)}
+          />
+        </div>
+        <div>
+          <label htmlFor="endDate">End Date: </label>
+          <input
+            type="date"
+            id="endDate"
+            value={endDate}
+            onChange={(e) => setEndDate(e.target.value)}
+          />
+        </div>
       </div>
       <h3>Expense History</h3>
-      <ul>
+      <ul className="expense-history">
         {filteredExpenses.map((expense) => (
-          <li key={expense._id}>
+          <li className="expense-item" key={expense._id}>
             {expense.category}: ${convertToSelectedCurrency(expense.amount)} on {new Date(expense.date).toLocaleDateString()}
+            <button className="delete-button" onClick={() => handleDelete(expense._id)}>
+              Delete
+            </button>
+            <button className="delete-button" onClick={() => handleDelete(expense._id)}>
+              Edit
+            </button>
           </li>
         ))}
       </ul>
