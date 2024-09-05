@@ -6,7 +6,6 @@ const BudgetForm = ({ onAddBudget }) => {
   const [category, setCategory] = useState('');
   const [budgetLimit, setBudgetLimit] = useState('');
 
-  // Define categories (can also fetch from an API or database)
   const categories = [
     'Groceries',
     'Entertainment',
@@ -25,8 +24,7 @@ const BudgetForm = ({ onAddBudget }) => {
       await axios.post('http://localhost:5000/api/budgets/', newBudget, {
         headers: { Authorization: `Bearer ${token}` }
       });
-      // Optionally call onAddBudget to update the parent component
-      // onAddBudget(newBudget);
+     alert('budget added')
       setCategory('');
       setBudgetLimit('');
     } catch (err) {

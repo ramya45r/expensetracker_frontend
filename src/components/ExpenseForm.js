@@ -6,7 +6,6 @@ const ExpenseForm = ({ onAddExpense }) => {
   const [category, setCategory] = useState('');
   const [description, setDescription] = useState('');
   const [income, setIncome] = useState('');
-  // Define categories (can also fetch from an API or database)
   const categories = [
     'Groceries',
     'Entertainment',
@@ -25,6 +24,7 @@ const ExpenseForm = ({ onAddExpense }) => {
         headers: { Authorization: `Bearer ${token}` }
       });
       onAddExpense(newExpense);
+      alert("Expense added")
       setAmount('');
       setCategory('');
       setDescription('');
@@ -40,7 +40,7 @@ const handleIncome=async ()=>{
         await axios.post('http://localhost:5000/api/expenses/income', newExpense, {
           headers: { Authorization: `Bearer ${token}` }
         });
-       
+       alert('income added')
       } catch (err) {
         console.error(err);
       }
